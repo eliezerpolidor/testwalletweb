@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-4 m-l-10">
+        <div class="card content">
+            <div class="card-body">
+                <h2>Usuario</h2>
+                <p>Nombres <strong>{{ user.names }}</strong></p>
+                <p>Documento <strong>{{ user.document }}</strong></p>
+                <p>Teléfono <strong>{{ user.cellphone }}</strong></p>
+                <p>Correo <strong>{{ user.email }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card content">
+            <div class="card-body">
+                <h2>Wallet</h2>
+                <p>Saldo <strong>{{ wallet.balance | currency }}</strong></p>
+                <div>
+                    <button class="btn btn-info text-uppercase waves-effect waves-light" (click)="open(content)"> 
+                        Recargar
+                    </button>
+                    <button class="btn btn-info text-uppercase waves-effect waves-light m-l-5"> 
+                        Pagar
+                    </button>
+                    <button class="btn btn-info text-uppercase waves-effect waves-light m-l-5"> 
+                        Confirmar pago
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>One fine body&hellip;</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    </div>
+  </ng-template>

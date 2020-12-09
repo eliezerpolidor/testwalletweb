@@ -1,0 +1,10 @@
+<!-- nav -->
+<nav class="navbar navbar-expand navbar" *ngIf="currentUser">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" (click)="logout()"><i class="icon-logout mr-2"></i>Salir</a>
+  </div>
+</nav>
+
+<alert></alert>
+
+<router-outlet></router-outlet>

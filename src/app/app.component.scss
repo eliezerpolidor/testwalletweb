@@ -1,0 +1,11 @@
+@import '../assets/scss/variable.scss';
+
+a {
+    cursor: pointer;
+}
+
+nav {
+    background-color: $topbar;
+    color: $light;
+    margin-bottom: 10px;
+}

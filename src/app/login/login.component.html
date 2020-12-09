@@ -1,0 +1,40 @@
+<div class="login-register" style="background-image:url(assets/images/background/login-register.jpg);">
+    <div class="login-box card">
+        <div class="card-body p-4">
+
+            <form class="form-horizontal form-material" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <img class="logo" src="assets/images/angular-logo.png">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="email" placeholder="Email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">el email es requerido</div>
+                            <div *ngIf="f.email.errors.email">debe ingresar un email válido</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="password" placeholder="Password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">contraseña requerida</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <button [disabled]="loading" class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Iniciar sesión
+                    </button>
+                </div>
+                <div class="form-group m-b-0" z>
+                    <div class="col-sm-12 text-center">
+                      <div><a class="text-info m-l-5" [routerLink]="['/signup']"><b>Registro</b></a></div>
+                    </div>
+                  </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
