@@ -10,7 +10,7 @@
             </div>
         </div>
     </div>
-    <div class="col-3">
+    <div class="col-6">
         <div class="card content">
             <div class="card-body">
                 <h2>Wallet</h2>
@@ -19,10 +19,10 @@
                     <button class="btn btn-info text-uppercase waves-effect waves-light" (click)="open(content)"> 
                         Recargar
                     </button>
-                    <button class="btn btn-info text-uppercase waves-effect waves-light m-l-5"> 
+                    <button class="btn btn-info text-uppercase waves-effect waves-light m-l-5" (click)="open(content2)"> 
                         Pagar
                     </button>
-                    <button class="btn btn-info text-uppercase waves-effect waves-light m-l-5"> 
+                    <button class="btn btn-info text-uppercase waves-effect waves-light m-l-5" (click)="open(content3)"> 
                         Confirmar pago
                     </button>
                 </div>
@@ -32,17 +32,126 @@
     </div>
 </div>
 
-<ng-template #content let-c="close" let-d="dismiss">
+<ng-template #content let-c="close" let-d="dismiss" >
     <div class="modal-header">
-      <h4 class="modal-title">Modal title</h4>
+      <h4 class="modal-title">Recargar saldo</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p>One fine body&hellip;</p>
+        <form class="form-horizontal form-material" id="form" #f="ngForm" [formGroup]="myFormReloadBalance" (ngSubmit)="f.form.valid && reloadBalance()"  novalidate>
+            <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <input class="form-control" required="" type="number" placeholder="Monto" formControlName="value" (onChange)="transformAmount($event)">
+                      <div class="alert alert-danger mt-2" role="alert" *ngIf=" myFormReloadBalance.get('value').invalid && myFormReloadBalance.get('value').touched">
+                          <div *ngIf=" myFormReloadBalance.get('value').hasError('required')">
+                              {{MessageErrors.Required}}
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <input class="form-control" required="" type="text" placeholder="Teléfono" formControlName="cellphone">
+                      <div class="alert alert-danger mt-2" role="alert" *ngIf=" myFormReloadBalance.get('cellphone').invalid && myFormReloadBalance.get('cellphone').touched">
+                          <div *ngIf=" myFormReloadBalance.get('cellphone').hasError('required'); else elseONE ">
+                              {{MessageErrors.Required}}
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <input class="form-control" required="" type="text" placeholder="Documentos" formControlName="document">
+                      <div class="alert alert-danger mt-2" role="alert" *ngIf=" myFormReloadBalance.get('document').invalid && myFormReloadBalance.get('document').touched">
+                          <div *ngIf=" myFormReloadBalance.get('document').hasError('required'); else elseONE ">
+                              {{MessageErrors.Required}}
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group text-center">
+              <div class="col-xs-12">
+                <button type="submit" class="btn btn-info btn-block text-uppercase waves-effect waves-light" [disabled]="myFormReloadBalance.invalid"> 
+                  Recargar
+                </button>
+              </div>
+            </div>
+          </form>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+</ng-template>
+
+
+<ng-template #content2 let-c="close" let-d="dismiss" >
+    <div class="modal-header">
+      <h4 class="modal-title">Realizar pago</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-  </ng-template>
+    <div class="modal-body">
+        <form class="form-horizontal form-material" id="form2" #f2="ngForm" [formGroup]="myFormPayment" (ngSubmit)="f2.form.valid && payment()"  novalidate>
+            <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <input class="form-control" required="" type="number" placeholder="Monto" formControlName="amount">
+                      <div class="alert alert-danger mt-2" role="alert" *ngIf=" myFormPayment.get('amount').invalid && myFormPayment.get('amount').touched">
+                          <div *ngIf=" myFormPayment.get('amount').hasError('required')">
+                              {{MessageErrors.Required}}
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group text-center">
+              <div class="col-xs-12">
+                <button type="submit" class="btn btn-info btn-block text-uppercase waves-effect waves-light" [disabled]="myFormPayment.invalid"> 
+                  Pagar
+                </button>
+              </div>
+            </div>
+          </form>
+    </div>
+</ng-template>
+
+<ng-template #content3 let-c="close" let-d="dismiss" >
+    <div class="modal-header">
+      <h4 class="modal-title">Confirmar pago</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal form-material" id="form2" #f3="ngForm" [formGroup]="myFormConfirmPayment" (ngSubmit)="f3.form.valid && confirmPayment()"  novalidate>
+            <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <div class="col-xs-12">
+                      <input class="form-control" required="" type="number" placeholder="Token de pago" formControlName="tokenId">
+                      <div class="alert alert-danger mt-2" role="alert" *ngIf=" myFormConfirmPayment.get('tokenId').invalid && myFormConfirmPayment.get('tokenId').touched">
+                          <div *ngIf=" myFormConfirmPayment.get('tokenId').hasError('required')">
+                              {{MessageErrors.Required}}
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group text-center">
+              <div class="col-xs-12">
+                <button type="submit" class="btn btn-info btn-block text-uppercase waves-effect waves-light" [disabled]="myFormConfirmPayment.invalid"> 
+                  Pagar
+                </button>
+              </div>
+            </div>
+          </form>
+    </div>
+</ng-template>
+

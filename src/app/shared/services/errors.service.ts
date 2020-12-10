@@ -1,5 +1,6 @@
 export const MessageErrors = Object.freeze({
     Required : 'Field is required.',
+    min: 'valor no permitido',
     Name_Max : 'Max of 30 characters.',
     Name_Pattern : 'Only words and spaces.',
     PhoneNumber_Max : 'Max of 15 characters.',

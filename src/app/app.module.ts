@@ -13,7 +13,7 @@ import { AlertComponent } from './shared/alert/alert.component';
 
 import { FilterPipe } from './home/filter.pipe';
 import { SignupModule } from './signup/signup.module';
-
+import { CurrencyPipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import { SignupModule } from './signup/signup.module';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

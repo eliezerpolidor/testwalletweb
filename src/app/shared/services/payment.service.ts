@@ -10,23 +10,23 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class WalletService {
+export class PaymentService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
-
-  get() : Observable<Array<any>> {
-
-    const currentUser = this.authService.currentUserValue;
-    const Url =  environment.BASE_API_URL+"/wallet";
-  
-    return this.http.get<any>(Url,{headers:{authorization:currentUser.token}});
-    
-  }
 
   post(body) : Observable<Array<any>> {
 
     const currentUser = this.authService.currentUserValue;
-    const Url =  environment.BASE_API_URL+"/wallet";
+    const Url =  environment.BASE_API_URL+"/payment";
+  
+    return this.http.post<any>(Url, body, {headers:{authorization:currentUser.token}});
+    
+  }
+
+  confirm(body) : Observable<Array<any>> {
+
+    const currentUser = this.authService.currentUserValue;
+    const Url =  environment.BASE_API_URL+"/payment/confirm";
   
     return this.http.put<any>(Url, body, {headers:{authorization:currentUser.token}});
     
